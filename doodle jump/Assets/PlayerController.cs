@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed;
+    private float inputHorizontal;
 
     // Start is called before the first frame update
     private void Start()
@@ -15,9 +14,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
+        switch(inputHorizontal)
         {
-            rb.AddForce(new Vector2(0, 1) * speed);
+            case 1:
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0));
+                break;
+
+            case -1:
+                transform.rotation = Quaternion.Euler(new Vector3(0, -180));
+                break;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(new Vector2((speed * inputHorizontal), 0));
     }
 }
