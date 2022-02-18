@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(0, -180));
                 break;
         }
+        Debug.Log(rb.velocity);
     }
 
     private void FixedUpdate()
