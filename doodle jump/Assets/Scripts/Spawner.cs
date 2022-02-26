@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         for(int i = 0; i < platfomsCount; i++)
         {
             float randomX = Random.Range(-6f, 6f);
-            float randomY = Random.Range(1, 3.5f);
+            float randomY = Random.Range(2.5f, 4f);
             distanceLastPlatform += randomY;
             Instantiate(platform, new Vector3(randomX, distanceLastPlatform), Quaternion.identity);
         }

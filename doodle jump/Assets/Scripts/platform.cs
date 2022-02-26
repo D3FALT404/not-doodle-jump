@@ -24,16 +24,19 @@ public class platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        rb = rb != null ? rb : collision.gameObject.GetComponent<Rigidbody2D>();
-        if(rb.velocity.y <= 0)
+        if(collision.gameObject.CompareTag("Player"))
         {
-            if(movedCamera == false)
+            rb = rb != null ? rb : collision.gameObject.GetComponent<Rigidbody2D>();
+            if(rb.velocity.y <= 0)
             {
-                StartCoroutine(cameraMovment.MoveTowards(transform.position.y));
-                movedCamera = true;
+                if(movedCamera == false)
+                {
+                    StartCoroutine(cameraMovment.MoveTowards(transform.position.y));
+                    movedCamera = true;
+                }
+                var rb = collision.gameObject.GetComponent<Rigidbody2D>();
+                rb.AddForce(new Vector2(0, 1) * speed);
             }
-            var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(new Vector2(0, 1) * speed);
         }
     }
 }
